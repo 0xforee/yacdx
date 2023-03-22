@@ -14,7 +14,7 @@ const { useMemo } = React;
 const chartWrapperStyle: React.CSSProperties = {
   // make chartjs chart responsive
   position: 'relative',
-  maxWidth: 1000,
+  maxWidth: 500,
 };
 
 const mapState = (s: State) => ({

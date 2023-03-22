@@ -4,8 +4,8 @@ import { useTranslation } from 'react-i18next';
 import ContentHeader from './ContentHeader';
 import s0 from './Home.module.scss';
 import Loading from './Loading';
-import TrafficChart from './TrafficChart';
 import TrafficNow from './TrafficNow';
+import AllChart from './AllChart';
 
 export default function Home() {
   const { t } = useTranslation();
@@ -16,9 +16,9 @@ export default function Home() {
         <div>
           <TrafficNow />
         </div>
-        <div className={s0.chart}>
-          <Suspense fallback={<Loading height="200px" />}>
-            <TrafficChart />
+        <div >
+          <Suspense fallback={<Loading height="400px" />}>
+            <AllChart/>
           </Suspense>
         </div>
       </div>
