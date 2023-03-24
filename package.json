@@ -72,7 +72,8 @@
     "workbox-routing": "6.5.4",
     "workbox-strategies": "6.5.4",
     "echarts-for-react": "3.0.2",
-    "echarts":"5.4.1"
+    "echarts":"5.4.1",
+    "socket.io-client":"4.6.1"
   },
   "devDependencies": {
     "@fontsource/inter": "4.5.15",
