@@ -1,0 +1,10 @@
+# syntax=docker/dockerfile:1
+FROM python:3.8-slim-buster
+# point to workdir, if not exits, create
+WORKDIR /app
+COPY requirements.txt requirements.txt
+RUN pip3 install -r requirements.txt
+COPY . .
+VOLUME ["/config"]
+VOLUME ["/logs"]
+CMD [ "python3", "main.py" ]
