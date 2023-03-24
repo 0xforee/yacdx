@@ -4,7 +4,7 @@ import { buildWebSocketURL, getURLAndInit } from '../misc/request-helper';
 
 import socketio, { io } from 'socket.io-client'
 
-var socket = io('ws://127.0.0.1:9001');
+var socket = io('ws://192.168.0.130:9091');
 console.log('create websocket connect')
 socket.on('connect', onConnect);
 socket.on('disconnect', onDisconnect);
