@@ -4,7 +4,8 @@ import { buildWebSocketURL, getURLAndInit } from '../misc/request-helper';
 
 import socketio, { io } from 'socket.io-client'
 
-var socket = io('ws://127.0.0.1:5001');
+var socket = io('ws://127.0.0.1:9001');
+console.log('create websocket connect')
 socket.on('connect', onConnect);
 socket.on('disconnect', onDisconnect);
 socket.on('statistic', onStatistic);
@@ -19,6 +20,7 @@ function onDisconnect(){
 }
 
 function onStatistic(value){
+    console.log('onStatistic: ' + value)
     statistic.appendData(value)
 }
 
@@ -37,7 +39,6 @@ const statistic = {
 
   subscribers: [],
   appendData(o: { client_count:{}, client_traffic:{} }) {
-    console.log('appendData: ' + o)
     this.subscribers.forEach((f) => f(o));
   },
 

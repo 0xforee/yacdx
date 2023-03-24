@@ -1,7 +1,7 @@
 import sqlite3
 import datetime
 
-from log import log
+from log import log_debug,log_error,log_info
 
 
 class DBHelper:
@@ -38,9 +38,9 @@ class DBHelper:
         try:
             cursor.execute(query)
             self.conn.commit()
-            print("Query executed successfully")
+            log_debug("Query %s executed successfully" % query)
         except Exception as e:
-            log(f"The error '{e}' occurred")
+            log_error(f"The error '{e}' occurred")
 
     def insert(self, connection):
         connect_id = connection["id"]
@@ -76,7 +76,7 @@ class DBHelper:
         );
         """
 
-        print('insert: %s ' % connect_id)
+        log_debug('insert: %s ' % connect_id)
         self.execute_query(create_connect)
 
     def close_db(self):
@@ -105,10 +105,10 @@ class DBHelper:
         cursor = self.conn.cursor()
         try:
             res = cursor.execute(query)
-            print("Query executed successfully")
+            log_debug("fetch data executed successfully" + str(query))
             return res.fetchall()
         except Exception as e:
-            log(f"The error '{e}' occurred")
+            log_error(f"The error '{e}' occurred")
 
 
 if __name__ == "__main__":

@@ -9,3 +9,6 @@ statistic_config = {
     "proxy_count": "select proxy, count(conn_id) as count from connections group by proxy order by count DESC limit 15;",
     "proxy_traffic": "select proxy, sum(download) as traffic from connections group by proxy order by traffic DESC limit 15;"
 }
+
+# info, debug, error
+log_level = 'debug'

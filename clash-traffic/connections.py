@@ -1,6 +1,6 @@
 import websocket
 import json
-from log import log
+from log import log_info,log_error,log_debug
 from db_helper import DBHelper
 from config import configs
 
@@ -50,6 +50,7 @@ class Connections:
 
     def teardown(self):
         self.ws.close()
+        log_info("connection server closed")
 
     def on_open(self, ws):
         """
@@ -57,7 +58,7 @@ class Connections:
         1 argument:
         @ ws: the WebSocketApp object
         """
-        log('A new WebSocketApp is opened!')
+        log_info('A new WebSocketApp is opened!')
 
     def on_message(self, ws, message):
         """
@@ -72,7 +73,7 @@ class Connections:
             received_msg = json.loads(message)
             self.deal_conenction_changed(received_msg['connections'])
         except Exception as e:
-            log("on message: %s " % e)
+            log_error("on_message: %s " % e)
 
 
     def deal_conenction_changed(self, connections):
@@ -107,15 +108,15 @@ class Connections:
         :return:
         """
         id = connection['id']
-        print('%s already closed!' % id)
+        log_info('%s connection closed!' % id)
         self.db_helper.insert(connection)
 
     def on_close(self, ws, close_status_code, close_msg):
-        log('The connection is closed')
+        log_info('The websocket connect is closed')
         print(close_msg)
 
     def on_error(self, ws, error):
-        log("on_error:" + str(error))
+        log_error("on_error:" + str(error))
 
     def start(self):
         self.ws = websocket.WebSocketApp(
@@ -130,7 +131,7 @@ class Connections:
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    log("start server")
+    log_info("start connection server")
     conn = Connections()
     conn.start()
 

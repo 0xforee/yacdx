@@ -2,25 +2,26 @@ import sys
 import threading
 
 import socket_server
-from log import log
+from log import log_info,log_error,log_debug
 from connections import Connections
 
 conn = None
 
 
 def start_websocket_server():
+    log_info("start websocket server")
     socket_server.start()
 
 
 def start_connections_parser():
-    log("start connections server")
+    log_info("start connections server")
     global conn
     conn = Connections()
     conn.start()
 
 
 def handler(signum, frame):
-    print('exception exit')
+    log_error('exception occurs!!')
     global conn
     if conn:
         conn.teardown()
@@ -35,13 +36,10 @@ if __name__ == "__main__":
     signal.signal(signal.SIGTERM, handler)
     signal.signal(signal.SIGINT, handler)
 
-
-    log("start connections parser")
     connections_server = threading.Thread(target=start_connections_parser)
     connections_server.start()
 
-    log("start server beginning...")
     socket_server_thread = threading.Thread(target=start_websocket_server)
     socket_server_thread.start()
-    log("start all server end, enjoy it")
+    log_info("start all server end, enjoy it")
     socket_server_thread.join()
